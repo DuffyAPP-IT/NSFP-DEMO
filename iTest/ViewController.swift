@@ -16,7 +16,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var user_data_text_entry: UITextField!
     @IBOutlet weak var protection_type_seg: UISegmentedControl!
     
-    @IBOutlet weak var progress_indicator: UIActivityIndicatorView!
     
 
     override func viewDidLoad() {
@@ -59,17 +58,14 @@ class ViewController: UIViewController {
     
     @IBAction func read_file_from_disk_button_tapped(_ sender: Any) {
         print("READ HIT")
-        progress_indicator.startAnimating()
         let user_data = "optional".data(using: .utf8)!
         let destURL = getDocumentsDirectory().appendingPathComponent("\(file_name_text_entry.text ?? "output.txt")")
         file_handler(data: user_data, url: destURL, mode: "read", protectionType: .noFileProtection)
-        progress_indicator.stopAnimating()
     }
     
 
     @IBAction func write_file_to_disk_button_tapped(_ sender: Any) {
         print("WRITE HIT")
-        progress_indicator.startAnimating()
         print("[@] protection type is -> \(protection_type_seg.selectedSegmentIndex)")
         
         let user_data = user_data_text_entry.text?.data(using: .utf8)
@@ -87,7 +83,6 @@ class ViewController: UIViewController {
         }  else if (selected_fpt==3) {
             file_handler(data: user_data!, url: destURL, mode: "write", protectionType: .noFileProtection)
         }
-        progress_indicator.stopAnimating()
     }
     
     func write_to_log(msg: String){
